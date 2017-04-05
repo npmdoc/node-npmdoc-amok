@@ -1,0 +1,993 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="http://amokjs.com"
+
+    >amok (v1.1.3)</a>
+</h1>
+<h4>Live editing, testing and debugging for JavaScript</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.amok">module amok</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.browser">
+            function <span class="apidocSignatureSpan">amok.</span>browser
+            <span class="apidocSignatureSpan">(port, command, args, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.compiler">
+            function <span class="apidocSignatureSpan">amok.</span>compiler
+            <span class="apidocSignatureSpan">(command, args, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.createRunner">
+            function <span class="apidocSignatureSpan">amok.</span>createRunner
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.hotpatch">
+            function <span class="apidocSignatureSpan">amok.</span>hotpatch
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.multiplexer">
+            function <span class="apidocSignatureSpan">amok.</span>multiplexer
+            <span class="apidocSignatureSpan">(port, host, debugPort, debugHost)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.print">
+            function <span class="apidocSignatureSpan">amok.</span>print
+            <span class="apidocSignatureSpan">(output)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.repl">
+            function <span class="apidocSignatureSpan">amok.</span>repl
+            <span class="apidocSignatureSpan">(input, output, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.server">
+            function <span class="apidocSignatureSpan">amok.</span>server
+            <span class="apidocSignatureSpan">(port, host)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.amok.watch">
+            function <span class="apidocSignatureSpan">amok.</span>watch
+            <span class="apidocSignatureSpan">(glob)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">amok.</span>_eventsCount</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">amok.</span>_events</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">amok.</span>client</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">amok.</span>domain</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">amok.</span>plugins</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">amok.</span>settings</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.amok" id="apidoc.module.amok">module amok</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.amok.browser" id="apidoc.element.amok.browser">
+        function <span class="apidocSignatureSpan">amok.</span>browser
+        <span class="apidocSignatureSpan">(port, command, args, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(port, command, args, options) {
+  if (typeof args === &#x27;undefined&#x27;) {
+    args = [];
+  } else {
+    args = args.slice(0);
+  }
+
+  return function browser(client, runner, done) {
+    var server = net.createServer();
+
+    server.once(&#x27;error&#x27;, function(error) {
+      debug(&#x27;server error&#x27;, error);
+      done(error);
+    });
+
+    server.once(&#x27;listening&#x27;, function() {
+      debug(&#x27;server listening&#x27;);
+
+      server.once(&#x27;close&#x27;, function() {
+        debug(&#x27;server close&#x27;);
+
+        var url = runner.get(&#x27;url&#x27;);
+
+        // TODO, move into browser_process.createProfile, deleting the first run file
+        // should be equivilent of providing these options, and be compatible with how firefox does it.
+        args.unshift(&#x27;--no-first-run&#x27;, &#x27;--no-default-browser-check&#x27;);
+        var dirname = temp.path(command);
+        args.unshift.apply(args, web.options(command, {
+          profile: dirname,
+          url: url,
+          debug: port,
+        }));
+
+        debug(&#x27;spawn %s %s&#x27;, command, args.join(&#x27; &#x27;));
+        web.spawn(command, args, options, function (error, browser) {
+          if (error) {
+            debug(&#x27;bail %s&#x27;, error.description);
+            return done(error);
+          }
+
+          runner.once(&#x27;close&#x27;, function kill() {
+            debug(&#x27;kill process&#x27;);
+            browser.kill(&#x27;SIGTERM&#x27;);
+          });
+
+          debug(&#x27;find %s&#x27;, url);
+          setTimeout(function find(retry) {
+            rdbg.get(port, &#x27;localhost&#x27;, function (error, targets) {
+              if (error) {
+                targets = [];
+              }
+
+              var matches = targets.filter(function (target) {
+                return url === target.url;
+              });
+
+              if (matches.length &#x3e; 0) {
+                debug(&#x27;ready&#x27;);
+                return done();
+              } else if (retry) {
+                return setTimeout(find, 1000, retry--);
+              }
+
+              if (error === undefined) {
+                error = new Error(&#x27;Cannot find browser tab \&#x27;&#x27; + url + &#x27;\&#x27;&#x27;);
+              }
+
+              debug(&#x27;find error&#x27;, error);
+              done(error);
+            });
+          }, 1000, 120);
+        });
+      });
+
+      debug(&#x27;close server&#x27;);
+      server.close();
+    });
+
+    debug(&#x27;starting server on port&#x27;, port);
+    server.listen(port);
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.compiler" id="apidoc.element.amok.compiler">
+        function <span class="apidocSignatureSpan">amok.</span>compiler
+        <span class="apidocSignatureSpan">(command, args, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(command, args, options) {
+  if (typeof args == &#x27;undefined&#x27;) {
+    args = [];
+  } else {
+    args = args.slice(0);
+  }
+
+  return function compiler(client, runner, done) {
+    var entry = args.filter(function (arg) {
+      return arg.match(/(.js|.ts|.coffee)$/);
+    })[0];
+
+    var dirname = temp.mkdirSync(command);
+    var pathname = path.normalize(entry);
+    var basename = path.basename(pathname);
+    var filename = path.join(dirname, basename).replace(/\.[^\.]+$/, &#x27;.js&#x27;);
+
+    var scripts = {};
+    scripts[pathname] = filename;
+    runner.set(&#x27;scripts&#x27;, scripts);
+
+    args.unshift.apply(args, script.options(command, {
+      outfile: filename,
+      watch: true,
+    }));
+
+    debug(&#x27;spawn %s %s&#x27;, command, args.join(&#x27; &#x27;));
+    script.spawn(command, args, options, function (error, compiler) {
+      if (error) {
+        debug(&#x27;bail %s&#x27;, error.description);
+        return done(error);
+      }
+
+      runner.once(&#x27;close&#x27;, function kill() {
+        debug(&#x27;kill&#x27;);
+        compiler.kill(&#x27;SIGTERM&#x27;);
+      });
+
+      debug(&#x27;wait %s&#x27;, filename);
+      process.nextTick(function wait() {
+        fs.stat(filename, function (error, stat) {
+          if (error || stat.size === 0) {
+            return process.nextTick(wait);
+          }
+
+          setTimeout(function () {
+            debug(&#x27;ready&#x27;);
+            done();
+          }, 250);
+        });
+      });
+    });
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.createRunner" id="apidoc.element.amok.createRunner">
+        function <span class="apidocSignatureSpan">amok.</span>createRunner
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function createRunner() {
+  return new Runner();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.hotpatch" id="apidoc.element.amok.hotpatch">
+        function <span class="apidocSignatureSpan">amok.</span>hotpatch
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin() {
+  return function hotpatch(client, runner, done) {
+    var cwd = runner.get(&#x27;cwd&#x27;);
+    if (cwd) {
+      cwd = path.resolve(cwd);
+    } else {
+      cwd = process.cwd();
+    }
+
+    var scripts = {};
+    var watchers = {};
+
+    client.on(&#x27;close&#x27;, function () {
+      debug(&#x27;close&#x27;);
+      scripts = {};
+
+      Object.keys(watchers).forEach(function (key) {
+        watchers[key].close();
+      });
+
+      watchers = {};
+    });
+
+    client.on(&#x27;connect&#x27;, function () {
+      debug(&#x27;connect&#x27;);
+
+      client.debugger.on(&#x27;clear&#x27;, function () {
+        debug(&#x27;clear&#x27;);
+        scripts = {};
+
+        Object.keys(watchers).forEach(function (key) {
+          watchers[key].close();
+        });
+
+        watchers = {};
+      });
+
+      client.debugger.on(&#x27;scriptParse&#x27;, function (script) {
+        debug(&#x27;parse %s&#x27;, util.inspect(script));
+
+        var uri = url.parse(script.url);
+        var filename = null;
+        var sources = runner.get(&#x27;scripts&#x27;) || {};
+
+        if (uri.protocol === &#x27;file:&#x27;) {
+          filename = path.normalize(uri.pathname);
+          if (filename.match(/^\\[a-zA-Z]:\\/)) {
+            filename = filename.slice(1);
+          }
+        } else if (uri.protocol === &#x27;http:&#x27;) {
+          filename = uri.pathname.slice(1);
+          if (sources[path.normalize(filename)]) {
+            filename = path.resolve(sources[path.normalize(filename)]);
+          } else {
+            filename = path.resolve(cwd, filename);
+          }
+        }
+
+        if (!filename) {
+          return;
+        }
+
+        scripts[filename] = script;
+        if (watchers[filename]) {
+          return;
+        }
+
+        var dirname = path.dirname(filename);
+
+        debug(&#x27;watch directory %s&#x27;, dirname);
+        var watcher = fs.watch(dirname);
+        watchers[dirname] = watcher;
+
+        var streams = {};
+        watcher.on(&#x27;change&#x27;, function (event, filename) {
+          if (!filename) {
+            return;
+          }
+
+          filename = path.resolve(dirname, filename);
+
+          var script = scripts[filename];
+          if (!script) {
+            return;
+          }
+
+          debug(event, filename);
+          if (streams[filename]) {
+            return;
+          }
+
+          var source = &#x27;&#x27;;
+          var stream = fs.createReadStream(filename);
+          streams[filename] = stream;
+
+          stream.setEncoding(&#x27;utf-8&#x27;);
+          stream.on(&#x27;data&#x27;, function(chunk) {
+            source += chunk;
+          });
+
+          stream.on(&#x27;end&#x27;, function() {
+            streams[filename] = null;
+
+            if (source.length === 0) {
+              return;
+            }
+
+            debug(&#x27;patch script %s (%d bytes) &#x27;, script.url, source.length);
+            client.debugger.setScriptSource(script, source, function (error, result) {
+              if (error) {
+                debug(&#x27;set source error %s&#x27;, util.inspect(error));
+                return client.emit(&#x27;error&#x27;, error);
+              }
+
+              var detail = JSON.stringify({
+                detail: {
+                  filename: path.relative(cwd, filename),
+                  source: source,
+                }
+              });
+
+              var cmd = &#x27;var event = new CustomEvent(\&#x27;patch\&#x27;,&#x27; +
+              detail + &#x27;);\nwindow.dispatchEvent(event);&#x27;;
+
+              debug(&#x27;evaluate patch event&#x27;);
+              client.runtime.evaluate(cmd, function (error) {
+                if (error) {
+                  debug(&#x27;evaluate error %s&#x27;, util.inspect(error));
+                  return client.emit(&#x27;error&#x27;, error);
+                }
+              });
+            });
+          });
+        });
+      });
+
+      client.debugger.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;, error);
+        }
+
+        debug(&#x27;debugger&#x27;);
+      });
+
+      client.runtime.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;, error);
+        }
+
+        debug(&#x27;runtime&#x27;);
+      });
+    });
+
+    debug(&#x27;done&#x27;);
+    done();
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.multiplexer" id="apidoc.element.amok.multiplexer">
+        function <span class="apidocSignatureSpan">amok.</span>multiplexer
+        <span class="apidocSignatureSpan">(port, host, debugPort, debugHost)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(port, host, debugPort, debugHost) {
+  return function multiplexer(client, runner, done) {
+    // TODO The meat of this implementation should probaly go into an rdbg adapter module.
+    var upstream = {};
+
+    var server = http.createServer();
+    server.on(&#x27;request&#x27;, function (request, response) {
+      var upstreamRequest = http.request({
+        port: debugPort,
+        hostname: debugHost,
+        path: request.url,
+      });
+
+      if (request.url == &#x27;/json&#x27; || request.url === &#x27;/json/list&#x27;) {
+        upstreamRequest.on(&#x27;response&#x27;, function (upstreamResponse) {
+          var data = &#x27;&#x27;;
+
+          upstreamResponse.on(&#x27;data&#x27;, function (chunk) {
+            data += chunk;
+          });
+
+          upstreamResponse.on(&#x27;end&#x27;, function () {
+            var targets = JSON.parse(data);
+            targets.forEach(function (target) {
+              var webSocketDebuggerUrl = Object.keys(upstream).filter(function(key) {
+                return key.search(target.id);
+              })[0];
+
+              if (target.webSocketDebuggerUrl || webSocketDebuggerUrl) {
+                target.webSocketDebuggerUrl = url.format({
+                  protocol: &#x27;ws&#x27;,
+                  slashes: true,
+                  port: port,
+                  hostname: host,
+                  pathname: &#x27;/devtools/page/&#x27; + target.id,
+                });
+              }
+
+              if (target.webSocketDebuggerUrl) {
+                target.devtoolsFrontendUrl = util.format(&#x27;/devtools/inspector.html?ws=%s&#x27;, target.webSocketDebuggerUrl.slice(5));
+              }
+            });
+
+            response.end(JSON.stringify(targets, undefined, 2));
+          });
+        });
+
+        upstreamRequest.end();
+      } else {
+        upstreamRequest.on(&#x27;response&#x27;, function (upstreamResponse) {
+          upstreamResponse.pipe(response);
+        });
+
+        upstreamRequest.end();
+      }
+    });
+
+    var socket = ws.createServer({ server: server });
+    socket.on(&#x27;connection&#x27;, function (connection) {
+      var upstreamUrl = url.format({
+        protocol: &#x27;ws&#x27;,
+        slashes: true,
+        hostname: debugHost,
+        port: debugPort,
+        pathname: connection.upgradeReq.url,
+      });
+
+      if (!upstream[upstreamUrl]) {
+        var upstreamConnection = ws.createConnection(upstreamUrl);
+        upstream[upstreamUrl] = {
+          localId: 0,
+          connection: upstreamConnection,
+          connections: [connection],
+          mappings: {},
+          notifications: [],
+        };
+
+        upstreamConnection.on(&#x27;close&#x27;, function() {
+          upstream[upstreamUrl].connections.forEach(function(connection) {
+            connection.close();
+          });
+
+          delete upstream[upstreamUrl];
+        });
+
+        upstreamConnection.on(&#x27;message&#x27;, function (data) {
+          var message = JSON.parse(data);
+
+          if (message.id === undefined) {
+            upstream[upstreamUrl].notifications.push(JSON.parse(data));
+            upstream[upstreamUrl].connections.forEach(function (connection) {
+              connection.send(data);
+            });
+          } else {
+            var mappings = upstream[upstreamUrl].mappings[message.id];
+            message.id = mappings.id;
+            mappings.connection.send(JSON.stringify(message));
+          }
+        });
+      } else {
+        upstream[upstreamUrl].connections.push(connection);
+      }
+
+      connection.notifications = upstream[upstreamUrl].notifications.slice(0);
+      connection.upstream = upstream[upstreamUrl];
+
+      connection.on(&#x27;message&#x27;, function (data) {
+        var upstream = connection.upstream;
+
+        var message = JSON.parse(data);
+
+        if (message.method &#x26;&#x26; message.method.match(/enable$/)) {
+          var domain = message.method.split(&#x27;.&#x27;)[0];
+
+          connection.notifications = connection.notifications.filter(function (notification) {
+            if (notification.method.search(domain)) {
+              connection.send(JSON.stringify(notification));
+              return false;
+            }
+
+            return true;
+          });
+        }
+
+        var local = upstream.localId++; ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.print" id="apidoc.element.amok.print">
+        function <span class="apidocSignatureSpan">amok.</span>print
+        <span class="apidocSignatureSpan">(output)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(output) {
+  return function print(client, runner, done) {
+    client.console.on(&#x27;data&#x27;, function (message) {
+      output.write(message.text + &#x27;\n&#x27;);
+    });
+
+    client.on(&#x27;connect&#x27;, function () {
+      client.console.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;, error);
+        }
+        debug(&#x27;console&#x27;);
+      });
+    });
+
+    debug(&#x27;ready&#x27;);
+    done();
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.repl" id="apidoc.element.amok.repl">
+        function <span class="apidocSignatureSpan">amok.</span>repl
+        <span class="apidocSignatureSpan">(input, output, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(input, output, options) {
+  if (typeof options === &#x27;undefined&#x27;) {
+    options = {};
+  }
+
+  return function repl(client, runner, done) {
+    debug(&#x27;start&#x27;);
+    var repl = repls.start({
+      input: input,
+      output: output,
+      useColors: options.useColors
+    });
+
+    repl.on(&#x27;exit&#x27;, function() {
+      runner.close();
+    });
+
+    repl.eval = function (cmd, context, filename, callback) {
+      client.runtime.evaluate(cmd, function (error, output) {
+        if (error) {
+          return callback(error);
+        }
+
+        var result = output.result;
+        if (result.type === &#x27;string&#x27;) {
+          return callback(null, result.value);
+        } else if (result.type === &#x27;function&#x27;) {
+          var fn = new Function(&#x27;return &#x27; + result.description.replace(&#x27;[native code]&#x27;, &#x27;/* remote code */&#x27;));
+          return callback(null, fn());
+        } else if (result.subtype === &#x27;error&#x27;) {
+          return callback(result.description);
+        } else if (result.type === &#x27;object&#x27;) {
+          var obj = {};
+          return callback(null, obj);
+        } else {
+          return callback(null, eval(result.value));
+        }
+      });
+    };
+
+    repl.complete = function (line, callback) {
+      callback([], line);
+    };
+
+    client.console.on(&#x27;data&#x27;, function (message) {
+      repl.output.clearLine();
+      repl.output.cursorTo(0);
+      repl.output.write(message.text + &#x27;\n&#x27;);
+      repl.prompt(true);
+    });
+
+    client.on(&#x27;connect&#x27;, function () {
+      client.console.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;, error);
+        }
+
+        debug(&#x27;console enabled&#x27;);
+      });
+
+      client.runtime.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;);
+        }
+
+        debug(&#x27;runtime&#x27;);
+      });
+    });
+
+    debug(&#x27;ready&#x27;);
+    done();
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.server" id="apidoc.element.amok.server">
+        function <span class="apidocSignatureSpan">amok.</span>server
+        <span class="apidocSignatureSpan">(port, host)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(port, host) {
+  return function server(client, runner, done) {
+    var server = http.createServer();
+
+    server.once(&#x27;error&#x27;, function (error) {
+      done(error);
+    });
+
+    server.once(&#x27;listening&#x27;, function ready() {
+      runner.set(&#x27;url&#x27;, url.format({
+        protocol: &#x27;http&#x27;,
+        port: port,
+        hostname: host,
+        pathname: &#x27;/&#x27;
+      }));
+
+      debug(&#x27;ready&#x27;);
+      done();
+    });
+
+    runner.once(&#x27;close&#x27;, function close() {
+      debug(&#x27;close&#x27;);
+      server.close();
+    });
+
+    server.on(&#x27;request&#x27;, function handle(request, response) {
+      debug(&#x27;handle %s&#x27;, request.url);
+
+      var pathname = url.parse(request.url).pathname;
+      if (pathname === &#x27;/&#x27;) {
+        pathname = &#x27;/index.html&#x27;;
+      }
+
+      var scripts = runner.get(&#x27;scripts&#x27;) || {};
+      var cwd = runner.get(&#x27;cwd&#x27;) || process.cwd();
+      var filename = scripts[path.normalize(pathname.slice(1))] || path.normalize(pathname.slice(1));
+
+      if (!path.isAbsolute(filename)) {
+        filename = path.join(cwd, filename);
+      }
+
+      fs.stat(filename, function (error, stat) {
+        response.setHeader(&#x27;content-type&#x27;, mime.lookup(filename));
+
+        if (error) {
+          if (pathname === &#x27;/index.html&#x27;) {
+            debug(&#x27;generate index.html&#x27;);
+
+            response.write(&#x27;&#x3c;!DOCTYPE html&#x3e;&#x3c;html&#x3e;&#x3c;head&#x3e;&#x27;);
+            response.write(&#x27;&#x3c;title&#x3e;&#x27; + path.basename(cwd) + &#x27;&#x3c;/title&#x3e;&#x27;);
+            response.write(&#x27;&#x3c;/head&#x3e;&#x3c;body&#x3e;&#x27;);
+
+            if (scripts) {
+              Object.keys(scripts).forEach(function (src) {
+                response.write(&#x27;&#x3c;script src=&#x22;&#x27; + src + &#x27;&#x22;&#x3e;&#x3c;/script&#x3e;&#x27;);
+              });
+            }
+
+            return response.end(&#x27;&#x3c;/body&#x3e;&#x3c;/html&#x3e;&#x27;);
+          } else if (pathname === &#x27;/favicon.ico&#x27;) {
+            debug(&#x27;generate favicon.ico&#x27;);
+            return response.end();
+          } else {
+            debug(&#x27;404 %s&#x27;, pathname);
+            response.statusCode = 404;
+            return response.end(&#x27;404&#x27;);
+          }
+        }
+
+        if (stat.isFile()) {
+          debug(&#x27;stream %s&#x27;, filename);
+          fs.createReadStream(filename).pipe(response);
+        } else {
+          debug(&#x27;403 %s&#x27;, pathname);
+          response.statusCode = 403;
+          return response.end(&#x27;403&#x27;);
+        }
+      });
+    });
+
+    server.listen(port, host);
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.amok.watch" id="apidoc.element.amok.watch">
+        function <span class="apidocSignatureSpan">amok.</span>watch
+        <span class="apidocSignatureSpan">(glob)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function plugin(glob) {
+  return function watch(client, runner, done) {
+    var cwd = runner.get(&#x27;cwd&#x27;);
+    if (cwd) {
+      cwd = path.resolve(cwd);
+    } else {
+      cwd = process.cwd();
+    }
+
+    debug(&#x27;watch %s&#x27;, glob);
+
+    var watcher = chokidar.watch(glob, {
+      ignoreInitial: true,
+      cwd: cwd,
+    });
+
+    watcher.once(&#x27;error&#x27;, function error(error) {
+      debug(&#x27;error %s&#x27;, util.inspect(error));
+      done(error);
+    });
+
+    watcher.once(&#x27;ready&#x27;, function ready() {
+      debug(&#x27;ready&#x27;);
+      done();
+    });
+
+    runner.once(&#x27;close&#x27;, function close() {
+      debug(&#x27;close&#x27;);
+      watcher.close();
+    });
+
+    client.on(&#x27;close&#x27;, function () {
+      watcher.removeAllListeners(&#x27;all&#x27;);
+    });
+
+    client.on(&#x27;connect&#x27;, function () {
+      watcher.on(&#x27;all&#x27;, function emit(event, filename) {
+        debug(&#x27;%s %s&#x27;, event, filename);
+
+        var detail = JSON.stringify({
+          detail: {
+            filename: url.resolve(&#x27;/&#x27;, filename).slice(1)
+          }
+        });
+
+        var cmd = &#x27;var event = new CustomEvent(\&#x27;&#x27; + event + &#x27;\&#x27;,&#x27; +
+          detail + &#x27;);\nwindow.dispatchEvent(event);&#x27;;
+
+        client.runtime.evaluate(cmd, function (error, result) {
+          if (error) {
+            debug(&#x27;error %s&#x27;, error.description);
+            return client.emit(&#x27;error&#x27;, error);
+          }
+        });
+      });
+
+      client.runtime.enable(function (error) {
+        if (error) {
+          return client.emit(&#x27;error&#x27;, error);
+        }
+
+        debug(&#x27;runtime&#x27;);
+      });
+    });
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+if (watchers[filename]) {
+  return;
+}
+
+var dirname = path.dirname(filename);
+
+debug(&#x27;watch directory %s&#x27;, dirname);
+var watcher = fs.<span class="apidocCodeKeywordSpan">watch</span>(dirname);
+watchers[dirname] = watcher;
+
+var streams = {};
+watcher.on(&#x27;change&#x27;, function (event, filename) {
+  if (!filename) {
+    return;
+  }
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
