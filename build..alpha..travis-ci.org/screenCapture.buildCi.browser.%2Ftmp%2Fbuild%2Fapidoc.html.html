@@ -268,7 +268,24 @@
     server.listen(port);
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+if (program.hot) {
+  amok.use(amok.hotpatch());
+}
+
+if (program.browser) {
+  amok.use(amok.<span class="apidocCodeKeywordSpan">browser</span>(program.debugPort, program.browser.command, program.browser.args
+, {
+    stdio: ['ignore', process.stderr, process.stderr]
+  }));
+}
+
+if (program.interactive) {
+  amok.use(amok.repl(process.stdin, process.stdout));
+} else {
+...</pre></li>
     </ul>
 
 
@@ -334,7 +351,23 @@
     });
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  amok.use(amok.server(program.httpPort, program.httpHost));
+} else {
+  program.help();
+}
+
+if (program.compiler) {
+  amok.use(amok.<span class="apidocCodeKeywordSpan">compiler</span>(program.compiler, program.args, {
+    stdio: ['ignore', process.stderr, process.stderr]
+  }));
+}
+
+if (program.watch) {
+  amok.use(amok.watch(program.watch));
+}
+...</pre></li>
     </ul>
 
 
@@ -518,7 +551,23 @@
     done();
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+if (program.watch) {
+  amok.use(amok.watch(program.watch));
+}
+
+if (program.hot) {
+  amok.use(amok.<span class="apidocCodeKeywordSpan">hotpatch</span>());
+}
+
+if (program.browser) {
+  amok.use(amok.browser(program.debugPort, program.browser.command, program.browser.args, {
+    stdio: ['ignore', process.stderr, process.stderr]
+  }));
+}
+...</pre></li>
     </ul>
 
 
@@ -655,7 +704,23 @@
         }
 
         var local = upstream.localId++; ...</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+amok.on('connect', function () {
+  amok.client.on('error', function (error) {
+    process.stderr.write(error.message + '\n');
+  });
+});
+
+amok.use(amok.<span class="apidocCodeKeywordSpan">multiplexer</span>(program.port, program.host, program.debugPort, program.debugHost
+));
+
+amok.connect(program.port, program.host);
+
+process.on('SIGTERM', function () {
+  process.exit(0);
+});
+...</pre></li>
     </ul>
 
 
@@ -686,7 +751,23 @@
     done();
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    stdio: ['ignore', process.stderr, process.stderr]
+  }));
+}
+
+if (program.interactive) {
+  amok.use(amok.repl(process.stdin, process.stdout));
+} else {
+  amok.use(amok.<span class="apidocCodeKeywordSpan">print</span>(process.stdout));
+}
+
+amok.on('connect', function () {
+  amok.client.on('error', function (error) {
+    process.stderr.write(error.message + '\n');
+  });
+});
+...</pre></li>
     </ul>
 
 
@@ -771,7 +852,23 @@
     done();
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+if (program.browser) {
+amok.use(amok.browser(program.debugPort, program.browser.command, program.browser.args, {
+  stdio: ['ignore', process.stderr, process.stderr]
+}));
+}
+
+if (program.interactive) {
+amok.use(amok.<span class="apidocCodeKeywordSpan">repl</span>(process.stdin, process.stdout));
+} else {
+amok.use(amok.print(process.stdout));
+}
+
+amok.on('connect', function () {
+amok.client.on('error', function (error) {
+  process.stderr.write(error.message + '\n');
+...</pre></li>
     </ul>
 
 
@@ -866,7 +963,23 @@
     server.listen(port, host);
   };
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+amok.set('url', program.url);
+} else if (program.scripts.length &gt; 0) {
+amok.set('scripts', program.scripts.reduce(function (object, value, key) {
+  object[value] = value;
+  return object;
+}, {}));
+
+amok.use(amok.<span class="apidocCodeKeywordSpan">server</span>(program.httpPort, program.httpHost));
+} else {
+program.help();
+}
+
+if (program.compiler) {
+amok.use(amok.compiler(program.compiler, program.args, {
+  stdio: ['ignore', process.stderr, process.stderr]
+...</pre></li>
     </ul>
 
 
@@ -945,21 +1058,21 @@
   };
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-if (watchers[filename]) {
-  return;
+if (program.compiler) {
+  amok.use(amok.compiler(program.compiler, program.args, {
+    stdio: ['ignore', process.stderr, process.stderr]
+  }));
 }
 
-var dirname = path.dirname(filename);
+if (program.watch) {
+  amok.use(amok.<span class="apidocCodeKeywordSpan">watch</span>(program.watch));
+}
 
-debug('watch directory %s', dirname);
-var watcher = fs.<span class="apidocCodeKeywordSpan">watch</span>(dirname);
-watchers[dirname] = watcher;
+if (program.hot) {
+  amok.use(amok.hotpatch());
+}
 
-var streams = {};
-watcher.on('change', function (event, filename) {
-  if (!filename) {
-    return;
-  }
+if (program.browser) {
 ...</pre></li>
     </ul>
 
