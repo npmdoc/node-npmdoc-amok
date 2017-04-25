@@ -1,6 +1,6 @@
 # npmdoc-amok
 
-#### api documentation for  [amok (v1.1.3)](http://amokjs.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-amok.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-amok) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-amok.svg)](https://travis-ci.org/npmdoc/node-npmdoc-amok)
+#### basic api documentation for  [amok (v1.1.3)](http://amokjs.com)  [![npm package](https://img.shields.io/npm/v/npmdoc-amok.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-amok) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-amok.svg)](https://travis-ci.org/npmdoc/node-npmdoc-amok)
 
 #### Live editing, testing and debugging for JavaScript
 
